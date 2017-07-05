@@ -22,7 +22,19 @@ namespace KiraBot.Modules
 		public async Task ManualWelcome(IUser user = null)
 		{
 			var userWelcome = user ?? Context.Client.CurrentUser;
-			await ReplyAsync($"Welcome to the server, {userWelcome.Mention}! We hope you enjoy your stay!");
+			var author = new EmbedAuthorBuilder()
+				.WithName("KiraBot")
+				.WithIconUrl("https://pbs.twimg.com/media/DD1pCKuWAAEwgtL.jpg");
+			var footer = new EmbedFooterBuilder()
+				.WithText($"Command executed by {MessageSource.User}.");
+			var builder = new EmbedBuilder()
+				.WithAuthor(author)
+				.WithFooter(footer)
+				.WithColor(new Color(0, 255, 0))
+				.WithCurrentTimestamp()
+				.WithDescription($"Welcome to the server, {userWelcome.Mention}! We hope you enjoy your stay!");
+
+			await ReplyAsync("", false, builder.Build());
 		}
 
 #if completed

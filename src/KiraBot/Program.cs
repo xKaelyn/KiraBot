@@ -42,12 +42,15 @@ namespace KiraBot
             services.GetRequiredService<LogService>();
             await services.GetRequiredService<CommandHandlingService>().InitializeAsync(services);
 
-            await _client.LoginAsync(TokenType.Bot, _config["token"]);
+            await _client.LoginAsync(TokenType.Bot, _config["Token"]);
             await _client.StartAsync();
 
 			_log.Info("Initialization Completed.");
 
             await Task.Delay(-1);
+
+			await _client.SetGameAsync("with Wumpus!");
+			await _client.SetStatusAsync(UserStatus.DoNotDisturb);
 		}
 
 
@@ -74,11 +77,5 @@ namespace KiraBot
                 .AddJsonFile("config.json")
                 .Build();
         }
-
-		public async Task ModifyStatus()
-		{
-			await _client.SetStatusAsync(UserStatus.DoNotDisturb);
-			await _client.SetGameAsync("with Wumpus!", "", StreamType.Twitch);
-		}
 	}
 }

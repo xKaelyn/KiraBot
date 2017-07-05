@@ -30,8 +30,8 @@ namespace KiraBot.Modules
 				.WithColor(new Color(0, 255, 0))
 				.WithFooter(footerbuilder)
 				.WithAuthor(authorbuilder)
-				.WithTitle("Check out Owen Chua Railways on ROBLOX!")
-				.WithDescription(":star: Click [here](https://www.roblox.com/games/693019234/OCR-Autonomous-Rail-Original) to visit! :star:");
+				.WithTitle(":star: Check out OCR on ROBLOX and on Discord! :star:")
+				.WithDescription("Click [here](https://www.roblox.com/games/693019234/OCR-Autonomous-Rail-Original) to visit the ROBLOX game \n **&** \n Click [here](https://discord.gg/PCdgUah) to join the Discord server!");
 
 			await ReplyAsync("", embed: builder);
 		}

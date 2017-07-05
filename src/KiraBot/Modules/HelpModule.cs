@@ -163,6 +163,9 @@ namespace KiraBot.Modules
 		public async Task Developer()
 		{
 			var application = await Context.Client.GetApplicationInfoAsync();
+			var authorbuilder = new EmbedAuthorBuilder()
+				.WithName("KiraBot")
+				.WithIconUrl("https://pbs.twimg.com/media/DD1pCKuWAAEwgtL.jpg");
 			var footerbuilder = new EmbedFooterBuilder()
 				.WithText("You can contact me by using the KiraBot Support server. Type ~support for the invitation!");
 			var builder = new EmbedBuilder()
@@ -198,13 +201,16 @@ namespace KiraBot.Modules
 		}
 
 		[Command("userinfo")]
-		[Summary("Returns info about the current user, or the user parameter, if one passed.")]
 		[Alias("user", "whois")]
+		[Summary("Returns info about the current user, or the user parameter, if one passed.")]
 		public async Task UserInfo([Summary("The (optional) user to get info for")] IUser user = null)
 		{
 			var userInfo = user ?? Context.Client.CurrentUser;
 			await ReplyAsync($"{userInfo.Username}#{userInfo.Discriminator}");
 		}
+
+		[Command("support")]
+		[Summary("Returns the ")]
 
 	//[Command("serverinfo")]
 	//[Summary("Returns info about the server the command was triggered in")]
