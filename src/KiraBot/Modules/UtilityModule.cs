@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Linq;
+using System.Net.Http;
+using Newtonsoft.Json;
 // Discord Requirements
 using Discord;
 using Discord.Commands;

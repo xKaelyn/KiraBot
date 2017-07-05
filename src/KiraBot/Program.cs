@@ -48,7 +48,10 @@ namespace KiraBot
 			_log.Info("Initialization Completed.");
 
             await Task.Delay(-1);
+		}
 
+		public async Task SetGame()
+		{
 			await _client.SetGameAsync("with Wumpus!");
 			await _client.SetStatusAsync(UserStatus.DoNotDisturb);
 		}
