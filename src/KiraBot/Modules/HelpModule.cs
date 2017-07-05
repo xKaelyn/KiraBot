@@ -13,7 +13,9 @@ namespace KiraBot.Modules
 {
     public class HelpModule : ModuleBase<SocketCommandContext>
     {
-		[Command("ok", RunMode = RunMode.Async)]
+		// Unused command | Updated version is ~info //
+#if unused
+		{[Command("ok", RunMode = RunMode.Async)]
 		public async Task ok()
 		{
 			var application = await Context.Client.GetApplicationInfoAsync();
@@ -40,6 +42,7 @@ namespace KiraBot.Modules
 
 			await ReplyAsync("", embed: builder);
 		}
+#endif
 
 		[Command("info", RunMode = RunMode.Async)]
 		public async Task Info()
