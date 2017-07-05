@@ -17,6 +17,8 @@
     <PackageReference Include="Discord.Net" Version="1.0.0-rc2" />
     <PackageReference Include="Discord.Net.WebSocket" Version="1.0.0-rc2" />
     <PackageReference Include="Discord.Net.Commands" Version="1.0.0-rc2" />
+    <PackageReference Include="Google.Apis" Version="1.27.1" />
+    <PackageReference Include="Google.Apis.YouTube.v3" Version="1.27.1.760" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="1.1.2" />
     <PackageReference Include="ImageSharp" Version="1.0.0-alpha9-00169" />
     <!-- Remove this line if using another configuration host: -->

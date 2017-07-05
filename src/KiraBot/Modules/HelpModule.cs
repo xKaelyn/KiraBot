@@ -11,9 +11,96 @@ using Discord.WebSocket;
 
 namespace KiraBot.Modules
 {
-    public class HelpModule : ModuleBase<SocketCommandContext>
-    {
-		// Unused command | Updated version is ~info //
+	public class HelpModule : ModuleBase<SocketCommandContext>
+	{
+		private CommandService _service;
+
+		// Create a constructor for the commandservice dependency
+		public HelpModule(CommandService service)
+		{
+			_service = service;
+		}
+
+		[Command("help")]
+		[Alias("listhelp", "commands")]
+		[Summary("List all commands you are able to use with KiraBot!")]
+		public async Task HelpAsync()
+		{
+			var application = await Context.Client.GetApplicationInfoAsync();
+			var author = new EmbedAuthorBuilder()
+				.WithName("KiraBot")
+				.WithIconUrl("https://pbs.twimg.com/media/DD1pCKuWAAEwgtL.jpg");
+			var footer = new EmbedFooterBuilder()
+				.WithText("All commands have the ~ prefix.");
+			var builder = new EmbedBuilder()
+			{
+				Author = author,
+				Color = new Color(0, 255, 0),
+				Description = "Here are the available commands!",
+				Footer = footer
+			};
+
+			foreach (var module in _service.Modules)
+			{
+				string description = null;
+				foreach (var cmd in module.Commands)
+				{
+					var result = await cmd.CheckPreconditionsAsync(Context);
+					if (result.IsSuccess)
+						description += $"{cmd.Aliases.First()}\n";
+				}
+
+				if (!string.IsNullOrWhiteSpace(description))
+				{
+					builder.AddField(x =>
+					{
+						x.Name = module.Name;
+						x.Value = description;
+						x.IsInline = false;
+					});
+				}
+			}
+
+			await ReplyAsync("", false, builder.Build());
+		}
+
+		[Command("chelp")]
+		[Alias("commandhelp")]
+		[Summary("Find out how to use a certain command | E.g: ~help info")]
+		[Remarks("")]
+		public async Task HelpAsync(string command)
+		{
+			var result = _service.Search(Context, command);
+
+			if (!result.IsSuccess)
+			{
+				await ReplyAsync($"Sorry, I couldn't find a command like **{command}**.");
+				return;
+			}
+
+			var builder = new EmbedBuilder()
+			{
+				Color = new Color(114, 137, 218),
+				Description = $"Here are some commands like **{command}**"
+			};
+
+			foreach (var match in result.Commands)
+			{
+				var cmd = match.Command;
+
+				builder.AddField(x =>
+				{
+					x.Name = string.Join(", ", cmd.Aliases);
+					x.Value = $"Parameters: {string.Join(", ", cmd.Parameters.Select(p => p.Name))}\n" +
+							  $"Summary: {cmd.Summary}";
+					x.IsInline = false;
+				});
+			}
+
+			await ReplyAsync("", false, builder.Build());
+		}
+
+// Unused command | Updated version is ~info //
 #if unused
 		{[Command("ok", RunMode = RunMode.Async)]
 		public async Task ok()

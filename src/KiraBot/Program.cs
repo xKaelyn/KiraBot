@@ -8,8 +8,9 @@ using Discord.Commands;
 using Discord.WebSocket;
 using KiraBot.Services;
 using NLog;
-using NLog.Config;
-using NLog.Targets;
+using System.Collections.Concurrent;
+using System.Linq;
+using System.Collections.Immutable;
 
 namespace KiraBot
 {
@@ -19,6 +20,9 @@ namespace KiraBot
 
 		public static uint OkColor { get; } = 0x00ff00;
 		public static uint ErrorColor { get; } = 0xff0000;
+
+		public static CommandService CommandService { get; private set; }
+		public static DiscordShardedClient Client { get; private set; }
 
 		static void Main(string[] args)
             => new Program().Start().GetAwaiter().GetResult();
