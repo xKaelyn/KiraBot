@@ -18,17 +18,38 @@ namespace KiraBot.Modules
 {
 	public class UtilityModule : ModuleBase<SocketCommandContext>
 	{
+#if completed
+		[Command("manualwelcome")]
+		[Summary("Returns info about the current user, or the user parameter, if one passed.")]
+		[Alias("user", "whois")]
+		public async Task ShuttingDown(IUser user = null)
+		{
+				 if (user.Id != < Your_User_ID >)
+				 {
+					 /*Code to execute when its not the owner.*/
+				 }
+				 else
+				 {
+					 Environment.Exit(0);
+				 }
+			 });
+
+		}
+	}
+#endif
+
 		[Command("manualwelcome")]
 		[Summary("Returns info about the current user, or the user parameter, if one passed.")]
 		[Alias("user", "whois")]
 		public async Task ManualWelcome(IUser user = null)
 		{
 			var userWelcome = user ?? Context.Client.CurrentUser;
+			var executedUser = user ?? Context.User;
 			var author = new EmbedAuthorBuilder()
 				.WithName("KiraBot")
 				.WithIconUrl("https://pbs.twimg.com/media/DD1pCKuWAAEwgtL.jpg");
 			var footer = new EmbedFooterBuilder()
-				.WithText($"Command executed by {MessageSource.User}.");
+				.WithText($"Command executed by {executedUser.Mention}.");
 			var builder = new EmbedBuilder()
 				.WithAuthor(author)
 				.WithFooter(footer)
