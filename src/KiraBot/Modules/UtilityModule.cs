@@ -71,7 +71,7 @@ namespace KiraBot.Modules
 
 			var avatarUrl = usr.RealAvatarUrl();
 			var shortenedAvatarUrl = await NadekoBot.Google.ShortenUrl(avatarUrl).ConfigureAwait(false);
-			await Context.Channel.EmbedAsync(new EmbedBuilder().WithOkColor()
+			var builder = new EmbedBuilder()
 				.AddField(efb => efb.WithName("Username").WithValue(usr.ToString()).WithIsInline(false))
 				.AddField(efb => efb.WithName("Avatar Url").WithValue(shortenedAvatarUrl).WithIsInline(false))
 				//.AddField(efb => efb.WithName("Avatar Id").WithValue(usr.AvatarId).WithIsInline(false))
