@@ -158,6 +158,23 @@ namespace KiraBot.Modules
 			await ReplyAsync("", embed: builder);
 		}
 
+		[Command("markdown101", RunMode = RunMode.Async)]
+		[Alias("whatismarkdown")]
+		public async Task WhatisMarkdown()
+		{
+			var author = new EmbedAuthorBuilder()
+				.WithName("KiraBot")
+				.WithIconUrl("https://pbs.twimg.com/media/DD1pCKuWAAEwgtL.jpg");
+			var builder = new EmbedBuilder()
+				.WithColor(new Color(0, 255, 0))
+				.WithAuthor(author)
+				.WithTitle("Visit this post made by Discord themselves!")
+				.WithCurrentTimestamp()
+				.WithDescription("https://support.discordapp.com/hc/en-us/articles/210298617-Markdown-Text-101-Chat-Formatting-Bold-Italic-Underline-");
+
+			await ReplyAsync("", embed: builder);
+		}
+
 		[Command("developer", RunMode = RunMode.Async)]
 		[Alias("dev")]
 		public async Task Developer()
@@ -209,8 +226,14 @@ namespace KiraBot.Modules
 			await ReplyAsync($"{userInfo.Username}#{userInfo.Discriminator}");
 		}
 
+#if completed
 		[Command("support")]
-		[Summary("Returns the ")]
+		[Summary("Returns the invitation link for the official #KiraBot Support Server!")]
+		public async Task SupportPost()
+		{
+
+		}
+#endif
 
 	//[Command("serverinfo")]
 	//[Summary("Returns info about the server the command was triggered in")]
