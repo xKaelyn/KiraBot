@@ -14,28 +14,25 @@ namespace KiraBot.Modules
 {
 	public class CustomCommands : ModuleBase<SocketCommandContext>
 	{
-		public static Color OkColor { get; }
-		public static Color ErrorColor { get; }
-
-		[Command("ocr", RunMode = RunMode.Async)]
-		public async Task OCR()
+		[Command("ael", RunMode = RunMode.Async)]
+		[Alias("tgm")]
+		[Summary("Returns the custom command advertising TGM & AEL")]
+		public async Task AEL()
 		{
-			var application = await Context.Client.GetApplicationInfoAsync();
 			var footerbuilder = new EmbedFooterBuilder()
-				.WithText("Want your own Custom Command? Contact me personally!");
+				.WithText("Want to own Custom Command? Contact me personally!");
 			var authorbuilder = new EmbedAuthorBuilder()
 				.WithName("KiraBot")
 				.WithIconUrl("https://pbs.twimg.com/media/DD1pCKuWAAEwgtL.jpg");
 			var builder = new EmbedBuilder()
-				.WithColor(new Color(0, 255, 0))
+				.WithColor(new Color(221, 160, 221))
 				.WithFooter(footerbuilder)
 				.WithAuthor(authorbuilder)
-				.WithTitle(":star: Check out OCR on ROBLOX and on Discord! :star:")
-				.WithDescription("Click [here](https://www.roblox.com/games/693019234/OCR-Autonomous-Rail-Original) to visit the ROBLOX game \n **&** \n Click [here](https://discord.gg/PCdgUah) to join the Discord server!");
+				.WithTitle(":rose: Check out TGM Group and the AEL on ROBLOX! :rose:")
+				.WithDescription("Click [here](https://www.roblox.com/My/Groups.aspx?gid=1043427) to visit the group page \n **&** \n Click [here](https://www.roblox.com/games/76470734/Subland-City-THE-TRUE-ORIGINAL) to visit Subland City \n **&** \n Click [here](https://discord.gg/YtvHJ4F) to visit the Discord!");
 
 			await ReplyAsync("", embed: builder);
 		}
-
 		[Command("thejojonetwork", RunMode = RunMode.Async)]
 		public async Task TheJojoNetwork()
 		{

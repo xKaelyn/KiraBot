@@ -160,17 +160,17 @@ namespace KiraBot.Modules
 
 		[Command("markdown101", RunMode = RunMode.Async)]
 		[Alias("whatismarkdown")]
-		public async Task WhatisMarkdown()
+		public async Task WhatisMarkdown(IUser user = null)
 		{
+			var userInfo = user ?? Context.Client.CurrentUser;
 			var author = new EmbedAuthorBuilder()
 				.WithName("KiraBot")
 				.WithIconUrl("https://pbs.twimg.com/media/DD1pCKuWAAEwgtL.jpg");
 			var builder = new EmbedBuilder()
 				.WithColor(new Color(0, 255, 0))
 				.WithAuthor(author)
-				.WithTitle("Visit this post made by Discord themselves!")
 				.WithCurrentTimestamp()
-				.WithDescription("https://support.discordapp.com/hc/en-us/articles/210298617-Markdown-Text-101-Chat-Formatting-Bold-Italic-Underline-");
+				.WithDescription($"{user.Mention}, visit [this](https://support.discordapp.com/hc/en-us/articles/210298617-Markdown-Text-101-Chat-Formatting-Bold-Italic-Underline-) post made by Discord themselves!");
 
 			await ReplyAsync("", embed: builder);
 		}
