@@ -20,7 +20,7 @@ namespace KiraBot.Modules
 		public async Task AEL()
 		{
 			var footerbuilder = new EmbedFooterBuilder()
-				.WithText("Want to own Custom Command? Contact me personally!");
+				.WithText("Want your own Custom Command? Contact me personally!");
 			var authorbuilder = new EmbedAuthorBuilder()
 				.WithName("KiraBot")
 				.WithIconUrl("https://pbs.twimg.com/media/DD1pCKuWAAEwgtL.jpg");
@@ -33,6 +33,7 @@ namespace KiraBot.Modules
 
 			await ReplyAsync("", embed: builder);
 		}
+
 		[Command("thejojonetwork", RunMode = RunMode.Async)]
 		public async Task TheJojoNetwork()
 		{
