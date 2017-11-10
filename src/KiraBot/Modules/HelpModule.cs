@@ -226,14 +226,25 @@ namespace KiraBot.Modules
 			await ReplyAsync($"{userInfo.Username}#{userInfo.Discriminator}");
 		}
 
-#if completed
 		[Command("support")]
 		[Summary("Returns the invitation link for the official #KiraBot Support Server!")]
 		public async Task SupportPost()
 		{
+			var application = await Context.Client.GetApplicationInfoAsync();
+			var footerbuilder = new EmbedFooterBuilder()
+				.WithText("I can offer support directly to you on this server. | I will not offer support in Direct Messages.");
+			var authorbuilder = new EmbedAuthorBuilder()
+				.WithName("KiraBot")
+				.WithIconUrl("https://pbs.twimg.com/media/DD1pCKuWAAEwgtL.jpg");
+			var builder = new EmbedBuilder()
+				.WithColor(new Color(0, 255, 0))
+				.WithFooter(footerbuilder)
+				.WithAuthor(authorbuilder)
+				.WithTitle("Please join the official #KiraBot Support Server for support and to speak to me")
+				.WithDescription("Invite link: https://discord.gg/MeefrTB");
 
+			await ReplyAsync("", embed: builder);
 		}
-#endif
 
 	//[Command("serverinfo")]
 	//[Summary("Returns info about the server the command was triggered in")]
